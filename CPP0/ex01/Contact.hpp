@@ -11,8 +11,10 @@
 /* ************************************************************************** */
 
 #ifndef CONTACT_H
+#define CONTACT_H
 #include <iostream>
 #include <string>
+#include <iomanip>
 
 class   Contact
 {
@@ -32,7 +34,9 @@ class   Contact
 		std::string	getDarkestSecret();
 		void		setDarkestSecret(std::string inputDarkestSecret);
 		void   		printContact();
-
+		void		displayContact();
+		std::string	truncate(std::string string, int width);
+	
 	private:
 		int			_index;
 		std::string	_FirstName;

@@ -14,11 +14,12 @@
 
 Contact::Contact()
 {
-    _FirstName = "empty";
-    _LastName = "empty";
-    _NickName = "empty";
-    _PhoneNumber = "empty";
-    _DarkestSecret ="empty";
+    _index = -1;
+    _FirstName = "..........";
+    _LastName = "..........";
+    _NickName = "..........";
+    _PhoneNumber = "..........";
+    _DarkestSecret ="..........";
     // std::cout << "Contact constructor executed!\n";
 }
 
@@ -89,10 +90,35 @@ void    Contact::setDarkestSecret(std::string inputDarkestSecret)
 
 void    Contact::printContact()
 {
-    std::cout << "Index is :" << _index << '\n';
+    std::cout << "Index is :" << _index + 1 << '\n';
     std::cout << "First Name is :" << _FirstName << '\n';
     std::cout << "Last Name is :" << _LastName << '\n';
     std::cout << "Nick Name is :" << _NickName << '\n';
     std::cout << "PhoneNumber is :" << _PhoneNumber << '\n';
     std::cout << "DarkestSecret is :" << _DarkestSecret << '\n';
+}
+
+std::string	Contact::truncate(std::string string, int width)
+{
+    std::string result;
+    
+    if (string.length() > width)
+        result = string.substr(0, width - 1) + '.';
+    else
+        result = string;
+    return result;
+}
+
+void    Contact::displayContact()
+{
+    int index;
+
+    index = getIndex();
+    if (index == -1)
+        std::cout << "| ..........";
+    else
+        std::cout << "| " << std::setw(10) << getIndex() + 1;
+    std::cout << " | " << std::setw(10) << truncate(getFirstName(), 10);
+    std::cout << " | " << std::setw(10) << truncate(getLastName(), 10);
+    std::cout << " | " << std::setw(10) << truncate(getNickName(), 10) << " |";
 }
