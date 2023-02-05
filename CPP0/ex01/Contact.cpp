@@ -90,12 +90,12 @@ void    Contact::setDarkestSecret(std::string inputDarkestSecret)
 
 void    Contact::printContact()
 {
-    std::cout << "Index is :" << _index + 1 << '\n';
-    std::cout << "First Name is :" << _FirstName << '\n';
-    std::cout << "Last Name is :" << _LastName << '\n';
-    std::cout << "Nick Name is :" << _NickName << '\n';
-    std::cout << "PhoneNumber is :" << _PhoneNumber << '\n';
-    std::cout << "DarkestSecret is :" << _DarkestSecret << '\n';
+    // std::cout << "Index is :" << _index + 1 << '\n';
+    std::cout << "\e[1;92mFirst Name is    : \e[0m" << _FirstName << '\n';
+    std::cout << "\e[1;92mLast Name is     : \e[0m" << _LastName << '\n';
+    std::cout << "\e[1;92mNick Name is     : \e[0m" << _NickName << '\n';
+    std::cout << "\e[1;92mPhoneNumber is   : \e[0m" << _PhoneNumber << '\n';
+    std::cout << "\e[1;92mDarkestSecret is : \e[0m" << _DarkestSecret << '\n';
 }
 
 std::string	Contact::truncate(std::string string, int width)
@@ -115,10 +115,10 @@ void    Contact::displayContact()
 
     index = getIndex();
     if (index == -1)
-        std::cout << "| ..........";
+        std::cout << "\e[1;32m|\e[0m ..........";
     else
-        std::cout << "| " << std::setw(10) << getIndex() + 1;
-    std::cout << " | " << std::setw(10) << truncate(getFirstName(), 10);
-    std::cout << " | " << std::setw(10) << truncate(getLastName(), 10);
-    std::cout << " | " << std::setw(10) << truncate(getNickName(), 10) << " |";
+        std::cout << "\e[1;32m| \e[0m" << std::setw(10) << index + 1;
+    std::cout << "\e[1;32m | \e[0m" << std::setw(10) << truncate(getFirstName(), 10);
+    std::cout << "\e[1;32m | \e[0m" << std::setw(10) << truncate(getLastName(), 10);
+    std::cout << "\e[1;32m | \e[0m" << std::setw(10) << truncate(getNickName(), 10) << "\e[1;92m |\e[0m";
 }

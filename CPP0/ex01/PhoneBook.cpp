@@ -6,7 +6,7 @@
 /*   By: moninechan <moninechan@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 00:14:23 by moninechan        #+#    #+#             */
-/*   Updated: 2023/02/05 00:55:03 by moninechan       ###   ########.fr       */
+/*   Updated: 2023/02/05 11:54:17 by moninechan       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,37 +35,63 @@ void	PhoneBook::setContact(int index, std::string *newContact)
 	_Contacts[index].setNickName(newContact[2]);
 	_Contacts[index].setPhoneNumber(newContact[3]);
 	_Contacts[index].setDarkestSecret(newContact[4]);
-	std::cout << "index =" << index << '\n';
-	_Contacts[index].printContact();
+	// std::cout << "index =" << index << '\n'; // For debugging purposes
+	// _Contacts[index].printContact(); // For debugging purposes
 }
 
 void	PhoneBook::addContact(int index)
 {
 	std::string	newContact[5];
 
-	std::cout << "Enter First Name of the new contact:\n";
+	std::cout << "\e[1;96mEnter First Name of the new contact:\e[0m\n";
 	std::getline(std::cin, newContact[0]);
-	std::cout << "Enter Last Name of the new contact:\n";
+	if (newContact[0].empty())
+	{
+		std::cout << "\e[1;101mInvalid input.\e[0m\n";
+		return ;
+	}
+	std::cout << "\e[1;96mEnter Last Name of the new contact:\e[0m\n";
 	std::getline(std::cin, newContact[1]);
-	std::cout << "Enter Nick Name of the new contact:\n";
+	if (newContact[1].empty())
+	{
+		std::cout << "\e[1;101mInvalid input.\e[0m\n";
+		return ;
+	}
+	std::cout << "\e[1;96mEnter Nick Name of the new contact:\e[0m\n";
 	std::getline(std::cin, newContact[2]);
-	std::cout << "Enter Phone Number of the new contact:\n";
+	if (newContact[2].empty())
+	{
+		std::cout << "\e[1;101mInvalid input.\e[0m\n";
+		return ;
+	}
+	std::cout << "\e[1;96mEnter Phone Number of the new contact:\e[0m\n";
 	std::getline(std::cin, newContact[3]);
-	std::cout << "Enter Darkest Secret of the new contact:\n";
+	if (newContact[3].empty())
+	{
+		std::cout << "\e[1;101mInvalid input.\e[0m\n";
+		return ;
+	}
+	std::cout << "\e[1;96mEnter Darkest Secret of the new contact:\e[0m\n";
 	std::getline(std::cin, newContact[4]);
+	if (newContact[4].empty())
+	{
+		std::cout << "\e[1;101mInvalid input.\e[0m\n";
+		return ;
+	}
 	PhoneBook::setContact(index, newContact);
+	std::cout << "\e[1;92mNew Contact successfully added!\e[0m\n";
 }
 
 void	PhoneBook::displayHeader()
 {
-    std::cout << "|============|============|============|============|\n";
-    std::cout << "|      INDEX | FIRST NAME |  LAST NAME |   NICKNAME |\n";
-    std::cout << "|============|============|============|============|\n";
+    std::cout << "\e[1;32m|============|============|============|============|\e[0m\n";
+    std::cout << "\e[1;32m|      INDEX | FIRST NAME |  LAST NAME |   NICKNAME |\e[0m\n";
+    std::cout << "\e[1;32m|============|============|============|============|\e[0m\n";
 }
 
 void	PhoneBook::displayFoot()
 {
-    std::cout << "|============|============|============|============|\n";
+    std::cout << "\e[1;32m|============|============|============|============|\e[0m\n";
 }
 
 void	PhoneBook::display()
@@ -88,10 +114,26 @@ void	PhoneBook::search(PhoneBook phonebook)
 	Contact		searchedContact;
 
 	phonebook.display();
-	std::cout << "Enter the index (1 to 8) of the contact you search :\n";
+	std::cout << "\e[1;96mEnter the index (1 to 8) of the contact you search :\e[0m\n";
 	std::getline(std::cin, str_index);
-	if (!str_index.empty())
-		int_index = stoi(str_index);
-	searchedContact = getContacts(int_index - 1);
-	searchedContact.printContact();
+	int_index = str_index[0] - 48;
+	if (str_index[1])
+		int_index = -1;
+	while (!str_index.empty())
+	{
+		if (int_index >= 1 && int_index <= 8) 
+		{
+			searchedContact = getContacts(int_index - 1);
+			searchedContact.printContact();
+			break ;
+		}
+		else
+		{
+			std::cout << "\e[1;101mInvalid index input. Please enter index between 1 and 8.\e[0m\n";
+			std::getline(std::cin, str_index);
+			int_index = str_index[0] - 48;
+			if (str_index[1])
+				int_index = -1;
+		}
+	}
 }
