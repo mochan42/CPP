@@ -1,7 +1,7 @@
 # CPP Module 00
 * 42 Core Curriculum - Level 4
 * Level 4 in the Holy Graph<br>
-* Passed with 80% on 21st Feb 2023.<br>
+* Passed with 80% on 5th Feb 2023.<br>
 
 # ex00
 The exercise consists in transforming a string from lower to upper characters.<br>
